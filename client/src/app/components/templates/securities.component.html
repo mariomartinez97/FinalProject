@@ -1,0 +1,79 @@
+<md-progress-spinner
+  *ngIf="load"
+  mode="indeterminate">
+</md-progress-spinner>
+
+<md-card *ngIf="!load">
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header" data-background-color="red">
+            <!-- <h4 class="title">Securities List</h4> -->
+            <md-input-container class="example-full-width">
+                <md-placeholder>
+                  <md-icon><i class="fa fa-search"> Search</i></md-icon>
+                </md-placeholder>
+              <input mdInput type="text" [(ngModel)]="query" id="search" style="font-family:Arial, FontAwesome">
+            </md-input-container>
+            <!-- <input type="text" [(ngModel)]="queryString" id="search" placeholder="&#xF002; Search" style="font-family:Arial, FontAwesome"> -->
+            <md-select *ngIf="isAuthenticated()" class="select" #select placeholder="Portfolio" name="portfolio" [(ngModel)]="selectorValue">
+              <md-option *ngFor="let p of portfolios" (click)="onChangePortfolio(p.name)" [value]=p.name>{{p.name}}</md-option>
+            </md-select>
+          </div>
+          <br>
+          <div class="card-content table-responsive">
+            <table class="table table-hover" mdSort (mdSortChange)="sortData($event)">
+              <thead class="text-success">
+                <tr>
+                  <th md-sort-header="ticker">Ticker</th>
+                  <!-- <th>Sector</th> -->
+                  <th md-sort-header="securities">Securities</th>
+                  <!-- <th>Industry</th> -->
+                  <th style="text-align:center">Go to Details</th>
+                  <th style="text-align:center">Check Prices</th>
+                  <th *ngIf="isAuthenticated()" style="text-align:center">Add to Portfolio &uarr;
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let security of getSecurities()">
+                  <td>
+                    <p (click)='gotoDetails(security)'>{{security.ticker}}</p>
+                  </td>
+                  <!-- <td>
+                    <p>{{security.sector}}</p>
+                  </td> -->
+                  <td>
+                    <p>{{security.security}}</p>
+                  </td>
+                  <!-- <td>
+                    <p>{{security.industry}}</p>
+                  </td> -->
+                  <td>
+                    <p style="text-align:center"><button title="View Details" class="btn btn-default btn-md"  (click)="gotoDetails(security)"><i class="fa fa-list-alt"></i></button></p>
+                  </td>
+                  <td>
+                    <p style="text-align:center"><button title="View Prices" class="btn btn-default btn-md" (click)="showHistoricalPrices(security)"><i class="fa fa-usd"></i></button></p>
+                  </td>
+                  <td *ngIf="isAuthenticated()">
+                    <p style="text-align:center"><button title="Add" [disabled]="!selected" class="btn btn-default btn-md" type="button" (click)='addToPortfolio(security)'><i class="fa fa-plus-square-o"></i></button></p>
+                  </td>
+                  <!--  <td><p><input type="text"  placeholder={{post._id}}> ></p></td> <button type="submit">View Prices</button> -->
+                  <!--<td class="text-danger">Can be anything</td> -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<a onclick="window.scrollTo(0, 0)" title="To Top">
+  <footer class="container-fluid text-center">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </footer>
+</a>
+</md-card>

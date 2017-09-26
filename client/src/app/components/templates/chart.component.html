@@ -1,0 +1,10 @@
+<md-card>
+<div>
+  <div class="wrapper" >
+    <br-security-finder (onSelected)='onNotifySelected($event)'></br-security-finder>
+    <img *ngIf="loading" id="chart-loading" src="../../../assets/spinner.gif"/>
+  </div>
+  <canvas id="chart"></canvas>
+  <!--<span><button (click)='convertToFiveDay()' class="btn btn-primary five-day" type="button">5days</button></span>-->
+</div>
+</md-card>

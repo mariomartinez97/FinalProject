@@ -1,0 +1,23 @@
+/*.portfolio-select  {
+  width:180px;
+}
+
+.select {
+       float:right;
+   }*/
+.select {
+  margin-left: 60%;
+  width: 15%;
+}
+
+.mat-sort-header-container {
+     align-items: center;
+}
+
+md-progress-spinner {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 150px;
+  color: #4CAF50;
+}
